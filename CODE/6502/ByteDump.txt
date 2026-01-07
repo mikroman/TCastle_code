@@ -1,0 +1,752 @@
+******************************* Segment: Default *******************************
+[mcode]
+9000: 10        -         .byte $10
+9001: 4c 2e 90  -         jmp L_JMP_904C_9001	// BA-2
+9004: 4c 4f 90  -         jmp L_JMP_906D_9004	// 3
+9007: 4c 87 91  -         jmp L_JMP_91A5_9007	// 6-1
+900a: 4c 9f 91  -         jmp L_JMP_91BD_900A	// 9
+900d: 4c 2c 91  -         jmp L_JMP_914A_900D	// 12-3
+9010: 4c 45 91  -         jmp L_JMP_9163_9010	// 15
+9013: 4c 29 94  - sys36883:jmp L_JMP_9447_9013	// 18
+9016: 4c 9d 95  -         jmp L_JMP_95BB_9016	// 21
+9019: 4c d1 95  -         jmp L_JMP_95EF_9019	// 24
+901c: 4c b9 94  -         jmp L_JMP_94D7_901C	// 27
+901f: 4c 1c 95  -         jmp L_JMP_953A_901F	// 30
+9022: 4c fe 94  -         jmp L_JMP_951C_9022	// 33
+9025: 4c 8b 94  -         jmp L_JMP_94A9_9025	// 36
+9028: 4c 73 93  -         jmp L_JMP_9391_9028	// 39
+902b: 4c 06 96  -         jmp L_JMP_9624_902B	// 42
+902e: 78        - L_JMP_904C_9001:sei
+902f: 20 5e 90  -         jsr L_JSR_907C_904D
+9032: a2 01     -         ldx #$01
+9034: 8e 41 90  -         stx $9041
+9037: ad 15 03  -         lda $0315
+903a: 8d 3d 90  -         sta $903D
+903d: ad 14 03  -         lda $0314
+9040: 8d 3c 90  -         sta $903C
+9043: a9 90     -         lda #$90
+9045: 8d 15 03  -         sta $0315
+9048: a9 a0     -         lda #$A0
+904a: 8d 14 03  -         sta $0314
+904d: 58        -         cli
+904e: 60        -         rts
+904f: 78        - L_JMP_906D_9004:sei
+9050: ad 3d 90  -         lda $903D
+9053: 8d 15 03  -         sta $0315
+9056: ad 3c 90  -         lda $903C
+9059: 8d 14 03  -         sta $0314
+905c: 58        -         cli
+905d: 60        -         rts
+905e: a9 fb     - L_JSR_907C_904D:lda #$FB
+9060: 25 01     -         and $01
+9062: 85 01     -         sta $01
+9064: a9 d0     -         lda #$D0
+9066: 85 fc     -         sta $FC
+9068: a9 00     -         lda #$00
+906a: 85 fb     -         sta $FB
+906c: a9 c0     -         lda #$C0
+906e: 85 fe     -         sta $FE
+9070: a9 00     -         lda #$00
+9072: 85 fd     -         sta $FD
+9074: a2 00     -         ldx #$00
+9076: a9 08     -         lda #$08
+9078: 20 54 91  -         jsr L_JSR_9172_9096
+907b: a9 04     -         lda #$04
+907d: 05 01     -         ora $01
+907f: 85 01     -         sta $01
+9081: 60        -         rts
+9082: ce 41 90  - unknown_90a0:dec $9041
+9085: d0 08     -         bne L_BRS_90AD_90A3
+9087: a9 14     -         lda #$14
+9089: 8d 41 90  -         sta $9041
+908c: 20 49 92  -         jsr L_JSR_9267_90AA
+908f: 6c 3c 90  - L_BRS_90AD_90A3:jmp ($903C)
+9092: 68        - BRK_vector:pla
+9093: a8        -         tay
+9094: 68        -         pla
+9095: aa        -         tax
+9096: 68        -         pla
+9097: 40        -         rti
+9098: ad 00 dc  - NMI_vector:lda $DC00                          // Data Port A (Keyboard, Joystick, Paddles)
+909b: 29 1f     -         and #$1F
+909d: 8d 3e 90  -         sta $903E
+90a0: ad 3e 90  -         lda $903E
+90a3: 29 01     -         and #$01
+90a5: d0 0f     -         bne L_BRS_90D4_90C3
+90a7: ce 01 d0  -         dec $D001                          // Sprite 0 Y Pos
+90aa: ad 01 d0  -         lda $D001                          // Sprite 0 Y Pos
+90ad: c9 34     -         cmp #$34
+90af: b0 05     -         bcs L_BRS_90D4_90CD
+90b1: a2 34     -         ldx #$34
+90b3: 8e 01 d0  -         stx $D001                          // Sprite 0 Y Pos
+90b6: ad 3e 90  - L_BRS_90D4_90C3,L_BRS_90D4_90CD:lda $903E
+90b9: 29 02     -         and #$02
+90bb: d0 0f     -         bne L_BRS_90EA_90D9
+90bd: ee 01 d0  -         inc $D001                          // Sprite 0 Y Pos
+90c0: ad 01 d0  -         lda $D001                          // Sprite 0 Y Pos
+90c3: c9 ee     -         cmp #$EE
+90c5: 90 05     -         bcc L_BRS_90EA_90E3
+90c7: a2 ed     -         ldx #$ED
+90c9: 8e 01 d0  -         stx $D001                          // Sprite 0 Y Pos
+90cc: ad 3e 90  - L_BRS_90EA_90D9,L_BRS_90EA_90E3:lda $903E
+90cf: 29 04     -         and #$04
+90d1: d0 20     -         bne L_BRS_9111_90EF
+90d3: ac 00 d0  -         ldy $D000                          // Sprite 0 X Pos
+90d6: ad 10 d0  -         lda $D010                          // Sprites 0-7 MSB of X coordinate
+90d9: 29 01     -         and #$01
+90db: f0 0f     -         beq L_BRS_910A_90F9
+90dd: c0 00     -         cpy #$00
+90df: d0 0f     -         bne L_BRS_910E_90FD
+90e1: a9 fe     -         lda #$FE
+90e3: 2d 10 d0  -         and $D010                          // Sprites 0-7 MSB of X coordinate
+90e6: 8d 10 d0  -         sta $D010                          // Sprites 0-7 MSB of X coordinate
+90e9: b8        -         clv
+90ea: 50 04     -         bvc L_BRS_910E_9108
+90ec: c0 18     - L_BRS_910A_90F9:cpy #$18
+90ee: 90 03     -         bcc L_BRS_9111_910C
+90f0: ce 00 d0  - L_BRS_910E_90FD,L_BRS_910E_9108:dec $D000                          // Sprite 0 X Pos
+90f3: ad 3e 90  - L_BRS_9111_90EF,L_BRS_9111_910C:lda $903E
+90f6: 29 08     -         and #$08
+90f8: d0 20     -         bne L_BRS_9138_9116
+90fa: ac 00 d0  -         ldy $D000                          // Sprite 0 X Pos
+90fd: ad 10 d0  -         lda $D010                          // Sprites 0-7 MSB of X coordinate
+9100: 29 01     -         and #$01
+9102: d0 0f     -         bne L_BRS_9131_9120
+9104: c0 ff     -         cpy #$FF
+9106: d0 0f     -         bne L_BRS_9135_9124
+9108: a9 01     -         lda #$01
+910a: 0d 10 d0  -         ora $D010                         // Sprites 0-7 MSB of X coordinate
+910d: 8d 10 d0  -         sta $D010                          // Sprites 0-7 MSB of X coordinate
+9110: b8        -         clv
+9111: 50 04     -         bvc L_BRS_9135_912F
+9113: c0 4b     - L_BRS_9131_9120:cpy #$4B
+9115: b0 03     -         bcs L_BRS_9138_9133
+9117: ee 00 d0  - L_BRS_9135_9124,L_BRS_9135_912F:inc $D000                          // Sprite 0 X Pos
+911a: ad 3e 90  - L_BRS_9138_9116,L_BRS_9138_9133:lda $903E
+911d: 29 10     -         and #$10
+911f: d0 08     -         bne L_BRS_9147_913D
+9121: ad 46 90  -         lda $9046
+9124: d0 03     -         bne L_BRS_9147_9142
+9126: 20 1f 93  -         jsr L_JSR_933D_9144
+9129: 6c 3f 90  - L_BRS_9147_913D,L_BRS_9147_9142:jmp ($903F)
+912c: 78        - L_JMP_914A_900D:sei
+912d: ad 15 03  -         lda $0315
+9130: 8d 40 90  -         sta $9040
+9133: ad 14 03  -         lda $0314
+9136: 8d 3f 90  -         sta $903F
+9139: a9 90     -         lda #$90
+913b: 8d 15 03  -         sta $0315
+913e: a9 b6     -         lda #$B6
+9140: 8d 14 03  -         sta $0314
+9143: 58        -         cli
+9144: 60        -         rts
+9145: 78        - L_JMP_9163_9010:sei
+9146: ad 40 90  -         lda $9040
+9149: 8d 15 03  -         sta $0315
+914c: ad 3f 90  -         lda $903F
+914f: 8d 14 03  -         sta $0314
+9152: 58        -         cli
+9153: 60        -         rts
+9154: 8d 64 91  - L_JSR_9172_9096,L_JSR_9172_94BD,L_JMP_9172_94D4,L_JSR_9172_94EB,L_JSR_9172_9502,L_JMP_9172_9519,L_JSR_9172_95D2,L_JSR_9172_95E9,L_JSR_9172_9606,L_JSR_9172_961D:sta v_9182
+9157: 8e 83 91  -         stx v_91A1
+915a: a0 00     -         ldy #$00
+915c: c9 00     -         cmp #$00
+915e: f0 19     -         beq L_BRS_9197_917C
+9160: 18        -         clc
+9161: a5 fc     -         lda $FC
+9163: 69 00     - v_9182-1:adc v_9182:#$00	// 1F,03,08
+9165: 8d 76 91  -         sta v_9194
+9168: b1 fb     - L_BRS_9186_918B,L_BRS_9186_9195:lda ($FB),Y
+916a: 91 fd     -         sta ($FD),Y
+916c: c8        -         iny
+916d: d0 f9     -         bne L_BRS_9186_918B
+916f: e6 fc     -         inc $FC
+9171: e6 fe     -         inc $FE
+9173: a5 fc     -         lda $FC
+9175: c9 00     - v_9194-1:cmp v_9194:#$00	// becomes 1F,5F,00
+9177: 90 ef     -         bcc L_BRS_9186_9195
+9179: e0 00     - L_BRS_9197_917C:cpx #$00
+917b: f0 09     -         beq L_BRS_91A4_9199
+917d: b1 fb     - L_BRS_919B_91A2:lda ($FB),Y
+917f: 91 fd     -         sta ($FD),Y
+9181: c8        -         iny
+9182: c0 40     - v_91A1-1:cpy v_91A1:#$40	// 40,E8
+9184: 90 f7     -         bcc L_BRS_919B_91A2
+9186: 60        - L_BRS_91A4_9199:rts
+9187: a9 38     - L_JMP_91A5_9007:lda #$38
+9189: 8d 18 d0  -         sta $D018                          // Memory Control Register
+918c: ad 00 dd  -         lda $DD00                          // Data Port A (Serial Bus, RS232, VIC Base Mem.)
+918f: 29 fc     -         and #$FC
+9191: 09 01     -         ora #$01
+9193: 8d 00 dd  -         sta $DD00                          // Data Port A (Serial Bus, RS232, VIC Base Mem.)
+9196: a9 20     -         lda #$20
+9198: 0d 11 d0  -         ora $D011                         // Control Register 1
+919b: 8d 11 d0  -         sta $D011                          // Control Register 1
+919e: 60        -         rts
+919f: a9 15     - L_JMP_91BD_900A:lda #$15
+91a1: 8d 18 d0  -         sta $D018                          // Memory Control Register
+91a4: ad 00 dd  -         lda $DD00                          // Data Port A (Serial Bus, RS232, VIC Base Mem.)
+91a7: 29 fc     -         and #$FC
+91a9: 09 03     -         ora #$03
+91ab: 8d 00 dd  -         sta $DD00                          // Data Port A (Serial Bus, RS232, VIC Base Mem.)
+91ae: a9 df     -         lda #$DF
+91b0: 2d 11 d0  -         and $D011                          // Control Register 1
+91b3: 8d 11 d0  -         sta $D011                          // Control Register 1
+91b6: 60        -         rts
+91b7: a9 8c     - L_JSR_91D5_9272:lda #$8C
+91b9: 85 fe     -         sta $FE
+91bb: a9 78     -         lda #$78
+91bd: 85 fd     -         sta $FD
+91bf: a0 00     -         ldy #$00
+91c1: b1 fd     -         lda ($FD),Y
+91c3: 20 d8 91  - L_JSR_91E1_9228:jsr L_JSR_91F6_91E1
+91c6: e8        - L_BRS_91E4_91F3:inx
+91c7: e0 02     -         cpx #$02
+91c9: 90 02     -         bcc L_BRS_91EB_91E7
+91cb: a2 00     -         ldx #$00
+91cd: bd 47 90  - L_BRS_91EB_91E7:lda $9047,X
+91d0: 91 fd     -         sta ($FD),Y
+91d2: c8        -         iny
+91d3: c0 28     -         cpy #$28
+91d5: 90 ef     -         bcc L_BRS_91E4_91F3
+91d7: 60        -         rts
+91d8: 29 f0     - L_JSR_91F6_91E1,L_JSR_91F6_9217,L_JSR_91F6_9254,L_JSR_91F6_928F:and #$F0
+91da: a2 00     -         ldx #$00
+91dc: dd 47 90  - L_BRS_91FA_9200:cmp $9047,X
+91df: f0 03     -         beq L_BRS_9202_91FD
+91e1: e8        -         inx
+91e2: d0 f8     -         bne L_BRS_91FA_9200
+91e4: 60        - L_BRS_9202_91FD:rts
+91e5: a9 8c     - L_JSR_9203_9275:lda #$8C
+91e7: 85 fe     -         sta $FE
+91e9: a9 a0     -         lda #$A0
+91eb: 85 fd     -         sta $FD
+91ed: a9 8c     -         lda #$8C
+91ef: 85 40     -         sta $40
+91f1: a9 78     -         lda #$78
+91f3: 85 3f     -         sta $3F
+91f5: a0 00     - L_BRS_9213_923E,L_BRS_9213_9244:ldy #$00
+91f7: b1 3f     -         lda ($3F),Y
+91f9: 20 d8 91  -         jsr L_JSR_91F6_9217
+91fc: ca        -         dex
+91fd: 10 02     -         bpl L_BRS_921F_921B
+91ff: a2 01     -         ldx #$01
+9201: bd 47 90  - L_BRS_921F_921B:lda $9047,X
+9204: 91 fd     -         sta ($FD),Y
+9206: a0 27     -         ldy #$27
+9208: b1 3f     -         lda ($3F),Y
+920a: 20 c3 91  -         jsr L_JSR_91E1_9228
+920d: a5 fd     -         lda $FD
+920f: 85 3f     -         sta $3F
+9211: 18        -         clc
+9212: 69 28     -         adc #$28
+9214: 85 fd     -         sta $FD
+9216: a5 fe     -         lda $FE
+9218: 85 40     -         sta $40
+921a: 69 00     -         adc #$00
+921c: 85 fe     -         sta $FE
+921e: c9 8e     -         cmp #$8E
+9220: d0 d3     -         bne L_BRS_9213_923E
+9222: a5 fd     -         lda $FD
+9224: c9 30     -         cmp #$30
+9226: d0 cd     -         bne L_BRS_9213_9244
+9228: 60        -         rts
+9229: a9 8e     - L_JMP_9247_9280:lda #$8E
+922b: 85 fe     -         sta $FE
+922d: a9 08     -         lda #$08
+922f: 85 fd     -         sta $FD
+9231: a0 00     -         ldy #$00
+9233: b1 fd     -         lda ($FD),Y
+9235: c8        -         iny
+9236: 20 d8 91  -         jsr L_JSR_91F6_9254
+9239: ca        - L_BRS_9257_9264:dex
+923a: 10 02     -         bpl L_BRS_925C_9258
+923c: a2 01     -         ldx #$01
+923e: bd 47 90  - L_BRS_925C_9258:lda $9047,X
+9241: 91 fd     -         sta ($FD),Y
+9243: c8        -         iny
+9244: c0 28     -         cpy #$28
+9246: 90 f1     -         bcc L_BRS_9257_9264
+9248: 60        -         rts
+9249: ad 44 90  - L_JSR_9267_90AA:lda $9044
+924c: d0 06     -         bne L_BRS_9272_926A
+924e: 20 65 92  -         jsr L_JSR_9283_926C
+9251: b8        -         clv
+9252: 50 03     -         bvc L_BRS_9275_9270
+9254: 20 b7 91  - L_BRS_9272_926A:jsr L_JSR_91D5_9272
+9257: 20 e5 91  - L_BRS_9275_9270:jsr L_JSR_9203_9275
+925a: ad 45 90  -         lda $9045
+925d: d0 03     -         bne L_BRS_9280_927B
+925f: 4c a7 92  -         jmp L_JMP_92C5_927D
+9262: 4c 29 92  - L_BRS_9280_927B:jmp L_JMP_9247_9280
+9265: a9 8c     - L_JSR_9283_926C:lda #$8C
+9267: 85 fe     -         sta $FE
+9269: a9 78     -         lda #$78
+926b: 85 fd     -         sta $FD
+926d: a0 00     - L_JMP_928B_92CD:ldy #$00
+926f: b1 fd     -         lda ($FD),Y
+9271: 20 d8 91  -         jsr L_JSR_91F6_928F
+9274: e8        - L_BRS_9292_92A2:inx
+9275: e0 02     -         cpx #$02
+9277: d0 02     -         bne L_BRS_9299_9295
+9279: a2 00     -         ldx #$00
+927b: bd 47 90  - L_BRS_9299_9295:lda $9047,X
+927e: 91 fd     -         sta ($FD),Y
+9280: c8        -         iny
+9281: cc 42 90  -         cpy $9042
+9284: 90 ee     -         bcc L_BRS_9292_92A2
+9286: e8        - L_BRS_92A4_92AF,L_BRS_92A4_92B1:inx
+9287: e0 02     -         cpx #$02
+9289: d0 02     -         bne L_BRS_92AB_92A7
+928b: a2 00     -         ldx #$00
+928d: c8        - L_BRS_92AB_92A7:iny
+928e: cc 43 90  -         cpy $9043
+9291: 90 f3     -         bcc L_BRS_92A4_92AF
+9293: f0 f1     -         beq L_BRS_92A4_92B1
+9295: e8        - L_BRS_92B3_92C2:inx
+9296: e0 02     -         cpx #$02
+9298: d0 02     -         bne L_BRS_92BA_92B6
+929a: a2 00     -         ldx #$00
+929c: bd 47 90  - L_BRS_92BA_92B6:lda $9047,X
+929f: 91 fd     -         sta ($FD),Y
+92a1: c8        -         iny
+92a2: c0 28     -         cpy #$28
+92a4: 90 ef     -         bcc L_BRS_92B3_92C2
+92a6: 60        -         rts
+92a7: a9 8e     - L_JMP_92C5_927D:lda #$8E
+92a9: 85 fe     -         sta $FE
+92ab: a9 08     -         lda #$08
+92ad: 85 fd     -         sta $FD
+92af: 4c 6d 92  -         jmp L_JMP_928B_92CD
+92b2: a6 a3     - L_JSR_92D0_93CE:ldx $A3
+92b4: a4 a4     -         ldy $A4
+92b6: a9 a0     -         lda #$A0
+92b8: 85 04     -         sta $04
+92ba: a9 00     -         lda #$00
+92bc: 85 03     -         sta $03
+92be: 98        -         tya
+92bf: 48        -         pha
+92c0: 29 f8     -         and #$F8
+92c2: 8d e7 92  -         sta $92E7
+92c5: a0 27     -         ldy #$27
+92c7: 18        - L_BRS_92E5_92ED:clc
+92c8: 69 00     -         adc #$00
+92ca: 90 02     -         bcc L_BRS_92EC_92E8
+92cc: e6 04     -         inc $04
+92ce: 88        - L_BRS_92EC_92E8:dey
+92cf: d0 f6     -         bne L_BRS_92E5_92ED
+92d1: 85 03     -         sta $03
+92d3: 68        -         pla
+92d4: 29 07     -         and #$07
+92d6: 18        -         clc
+92d7: 65 03     -         adc $03
+92d9: 85 03     -         sta $03
+92db: 90 02     -         bcc L_BRS_92FD_92F9
+92dd: e6 04     -         inc $04
+92df: 8a        - L_BRS_92FD_92F9:txa
+92e0: 0a        -         asl
+92e1: 90 02     -         bcc L_BRS_9303_92FF
+92e3: e6 04     -         inc $04
+92e5: 18        - L_BRS_9303_92FF:clc
+92e6: 29 f8     -         and #$F8
+92e8: 65 03     -         adc $03
+92ea: 85 03     -         sta $03
+92ec: 90 02     -         bcc L_BRS_930E_930A
+92ee: e6 04     -         inc $04
+92f0: 60        - L_BRS_930E_930A:rts
+92f1: a6 a3     -         ldx $A3
+92f3: a4 a4     -         ldy $A4
+92f5: a9 8c     -         lda #$8C
+92f7: 85 06     -         sta $06
+92f9: a9 00     -         lda #$00
+92fb: 85 05     -         sta $05
+92fd: 98        -         tya
+92fe: 4a        -         lsr
+92ff: 4a        -         lsr
+9300: 4a        -         lsr
+9301: f0 0f     -         beq L_BRS_9330_931F
+9303: a8        -         tay
+9304: a9 28     - L_BRS_9322_932E:lda #$28
+9306: 18        -         clc
+9307: 65 05     -         adc $05
+9309: 85 05     -         sta $05
+930b: 90 02     -         bcc L_BRS_932D_9329
+930d: e6 06     -         inc $06
+930f: 88        - L_BRS_932D_9329:dey
+9310: d0 f2     -         bne L_BRS_9322_932E
+9312: 8a        - L_BRS_9330_931F:txa
+9313: 4a        -         lsr
+9314: 4a        -         lsr
+9315: 18        -         clc
+9316: 65 05     -         adc $05
+9318: 85 05     -         sta $05
+931a: 90 02     -         bcc L_BRS_933C_9338
+931c: e6 06     -         inc $06
+931e: 60        - L_BRS_933C_9338:rts
+931f: ad 01 d0  - L_JSR_933D_9144,L_JSR_933D_9396:lda $D001                          // Sprite 0 Y Pos
+9322: 38        -         sec
+9323: e9 2d     -         sbc #$2D
+9325: 85 a4     -         sta $A4
+9327: ad 42 90  -         lda $9042
+932a: a0 03     -         ldy #$03
+932c: 18        -         clc
+932d: 6d 42 90  - L_BRS_934B_934F:adc $9042
+9330: 88        -         dey
+9331: d0 fa     -         bne L_BRS_934B_934F
+9333: 69 04     -         adc #$04
+9335: 85 a3     -         sta $A3
+9337: ad 01 d0  -         lda $D001                          // Sprite 0 Y Pos
+933a: a2 00     -         ldx #$00
+933c: 8e 49 90  -         stx $9049
+933f: 38        -         sec
+9340: e9 2d     -         sbc #$2D
+9342: e9 08     - L_BRS_9360_9367:sbc #$08
+9344: 90 05     -         bcc L_BRS_9369_9362
+9346: ee 49 90  -         inc $9049
+9349: d0 f7     -         bne L_BRS_9360_9367
+934b: a9 8c     - L_BRS_9369_9362:lda #$8C
+934d: 85 06     -         sta $06
+934f: a9 00     -         lda #$00
+9351: 85 05     -         sta $05
+9353: ae 49 90  -         ldx $9049
+9356: f0 0e     -         beq L_BRS_9384_9374
+9358: a9 28     - L_BRS_9376_9382:lda #$28
+935a: 18        -         clc
+935b: 65 05     -         adc $05
+935d: 85 05     -         sta $05
+935f: 90 02     -         bcc L_BRS_9381_937D
+9361: e6 06     -         inc $06
+9363: ca        - L_BRS_9381_937D:dex
+9364: d0 f2     -         bne L_BRS_9376_9382
+9366: ad 42 90  - L_BRS_9384_9374:lda $9042
+9369: 38        -         sec
+936a: 65 05     -         adc $05
+936c: 85 05     -         sta $05
+936e: 90 02     -         bcc L_BRS_9390_938C
+9370: e6 06     -         inc $06
+9372: 60        - L_BRS_9390_938C:rts
+9373: a9 01     - L_JMP_9391_9028:lda #$01
+9375: 8d 46 90  -         sta $9046
+9378: 20 1f 93  -         jsr L_JSR_933D_9396
+937b: ad 49 90  -         lda $9049
+937e: c9 02     -         cmp #$02
+9380: 90 52     -         bcc L_BRS_93F2_939E
+9382: f0 42     -         beq L_BRS_93E4_93A0
+9384: c9 03     -         cmp #$03
+9386: f0 28     -         beq L_BRS_93CE_93A4
+9388: aa        -         tax
+9389: ca        -         dex
+938a: ec 4a 90  -         cpx $904A
+938d: b0 45     -         bcs L_BRS_93F2_93AB
+938f: a5 05     -         lda $05
+9391: 38        -         sec
+9392: e9 28     -         sbc #$28
+9394: 85 05     -         sta $05
+9396: b0 02     -         bcs L_BRS_93B8_93B4
+9398: c6 06     -         dec $06
+939a: 20 da 93  - L_BRS_93B8_93B4:jsr L_JSR_93F8_93B8
+939d: ad 49 90  -         lda $9049
+93a0: cd 4a 90  -         cmp $904A
+93a3: b0 2f     -         bcs L_BRS_93F2_93C1
+93a5: a5 05     -         lda $05
+93a7: 18        -         clc
+93a8: 69 28     -         adc #$28
+93aa: 85 05     -         sta $05
+93ac: 90 02     -         bcc L_BRS_93CE_93CA
+93ae: e6 06     -         inc $06
+93b0: 20 b2 92  - L_BRS_93CE_93A4,L_BRS_93CE_93CA:jsr L_JSR_92D0_93CE
+93b3: 20 04 94  -         jsr L_JSR_9422_93D1
+93b6: a0 1c     -         ldy #$1C
+93b8: b1 03     -         lda ($03),Y
+93ba: 48        -         pha
+93bb: 20 0b 94  -         jsr L_JSR_9429_93D9
+93be: 68        -         pla
+93bf: c9 ff     -         cmp #$FF
+93c1: f0 03     -         beq L_BRS_93E4_93DF
+93c3: 20 eb 93  -         jsr L_JSR_9409_93E1
+93c6: a5 05     - L_BRS_93E4_93A0,L_BRS_93E4_93DF:lda $05
+93c8: 18        -         clc
+93c9: 69 28     -         adc #$28
+93cb: 85 05     -         sta $05
+93cd: 90 02     -         bcc L_BRS_93EF_93EB
+93cf: e6 06     -         inc $06
+93d1: 20 da 93  - L_BRS_93EF_93EB:jsr L_JSR_93F8_93EF
+93d4: a9 00     - L_BRS_93F2_939E,L_BRS_93F2_93AB,L_BRS_93F2_93C1:lda #$00
+93d6: 8d 46 90  -         sta $9046
+93d9: 60        -         rts
+93da: ad 43 90  - L_JSR_93F8_93B8,L_JSR_93F8_93EF:lda $9043
+93dd: 18        -         clc
+93de: ed 42 90  -         sbc $9042
+93e1: a8        -         tay
+93e2: 88        -         dey
+93e3: a9 10     -         lda #$10
+93e5: 91 05     - L_BRS_9403_9406:sta ($05),Y
+93e7: 88        -         dey
+93e8: 10 fb     -         bpl L_BRS_9403_9406
+93ea: 60        -         rts
+93eb: ad 43 90  - L_JSR_9409_93E1:lda $9043
+93ee: 18        -         clc
+93ef: ed 42 90  -         sbc $9042
+93f2: a8        -         tay
+93f3: 88        -         dey
+93f4: a9 01     -         lda #$01
+93f6: 91 05     - L_BRS_9414_9417:sta ($05),Y
+93f8: 88        -         dey
+93f9: 10 fb     -         bpl L_BRS_9414_9417
+93fb: 60        -         rts
+93fc: 78        - L_JSR_941A_95EF:sei
+93fd: a5 01     -         lda $01
+93ff: 29 fc     -         and #$FC
+9401: 85 01     -         sta $01
+9403: 60        -         rts
+9404: a5 01     - L_JSR_9422_93D1,L_JSR_9422_95BB:lda $01
+9406: 29 fe     -         and #$FE
+9408: 85 01     -         sta $01
+940a: 60        -         rts
+940b: a5 01     - L_JSR_9429_93D9,L_JMP_9429_95EC,L_JSR_9429_9620:lda $01
+940d: 09 03     -         ora #$03
+940f: 85 01     -         sta $01
+9411: 58        -         cli
+9412: 60        -         rts
+9413: 8e 3c 94  - L_JSR_9431_9581:stx $943C
+9416: a4 02     -         ldy $02
+9418: f0 0e     -         beq L_BRS_9446_9436
+941a: a5 fb     -         lda $FB
+941c: 18        - L_BRS_943A_9442:clc
+941d: 69 00     -         adc #$00
+941f: 90 02     -         bcc L_BRS_9441_943D
+9421: e6 fc     -         inc $FC
+9423: 88        - L_BRS_9441_943D:dey
+9424: d0 f6     -         bne L_BRS_943A_9442
+9426: 85 fb     -         sta $FB
+9428: 60        - L_BRS_9446_9436:rts
+9429: 20 e7 ff  - L_JMP_9447_9013:jsr $FFE7			// Close All Channels And Files
+942c: a9 90     -         lda #$90
+942e: 8d 17 03  -         sta $0317			// CBINV - BRK $90B0
+9431: a9 b0     -         lda #$B0
+9433: 8d 16 03  -         sta $0316
+9436: a9 90     -         lda #$90
+9438: 8d 19 03  -         sta $0319			// NMIINV - NMI $90B5
+943b: a9 b5     -         lda #$B5
+943d: 8d 18 03  -         sta $0318
+9440: a9 ea     -         lda #$EA
+9442: 8d 28 03  -         sta $0328			// STOP vector
+9445: a9 00     -         lda #$00
+9447: 20 90 ff  -         jsr $FF90			// Control OS Messages
+944a: a9 05     -         lda #$05
+944c: a6 ba     -         ldx $BA
+944e: a0 00     -         ldy #$00
+9450: 20 ba ff  -         jsr $FFBA			// Set Logical File Parameters
+9453: a9 05     -         lda #$05
+9455: a2 a1     -         ldx #$A1			// "TITLE"
+9457: a0 94     -         ldy #$94
+9459: 20 bd ff  -         jsr $FFBD			// Set Filename
+945c: a9 00     -         lda #$00
+945e: a2 00     -         ldx #$00
+9460: a0 5c     -         ldy #$5C
+9462: 20 d5 ff  -         jsr $FFD5			// Load RAM From Device
+9465: a9 05     -         lda #$05
+9467: a6 ba     -         ldx $BA
+9469: a0 00     -         ldy #$00
+946b: 20 ba ff  -         jsr $FFBA			// Set Logical File Parameters
+946e: a9 03     -         lda #$03
+9470: a2 a6     -         ldx #$A6			// "ARR"
+9472: a0 94     -         ldy #$94
+9474: 20 bd ff  -         jsr $FFBD			// Set Filename
+9477: a9 00     -         lda #$00
+9479: a2 40     -         ldx #$40
+947b: a0 bf     -         ldy #$BF
+947d: 20 d5 ff  -         jsr $FFD5			// Load RAM From Device
+9480: 4c 8b 94  -         jmp L_JMP_94A9_949E
+9483: 54 49 54 4c 45 41 52 52                          -         .byte $54,$49,$54,$4C,$45,$41,$52,$52	// TITLEARR
+948b: a9 60     - L_JMP_94A9_9025,L_JMP_94A9_949E:lda #$60
+948d: 85 fc     -         sta $FC	// $6000 (from)
+948f: a9 00     -         lda #$00
+9491: 85 fb     -         sta $FB
+9493: a9 a0     -         lda #$A0
+9495: 85 fe     -         sta $FE	// $A000 (to)
+9497: a9 00     -         lda #$00
+9499: 85 fd     -         sta $FD
+949b: a9 1f     -         lda #$1F
+949d: a2 40     -         ldx #$40	// plus 3F bytes
+949f: 20 54 91  -         jsr L_JSR_9172_94BD
+94a2: a9 5c     -         lda #$5C	// $5C00
+94a4: 85 fc     -         sta $FC
+94a6: a9 00     -         lda #$00
+94a8: 85 fb     -         sta $FB
+94aa: a9 8c     -         lda #$8C	// $8C00
+94ac: 85 fe     -         sta $FE
+94ae: a9 00     -         lda #$00
+94b0: 85 fd     -         sta $FD
+94b2: a9 03     -         lda #$03
+94b4: a2 e8     -         ldx #$E8	// plus E7 bytes
+94b6: 4c 54 91  -         jmp L_JMP_9172_94D4
+94b9: a9 20     - L_JMP_94D7_901C:lda #$20
+94bb: 85 fc     -         sta $FC
+94bd: a9 00     -         lda #$00
+94bf: 85 fb     -         sta $FB
+94c1: a9 e0     -         lda #$E0
+94c3: 85 fe     -         sta $FE
+94c5: a9 00     -         lda #$00
+94c7: 85 fd     -         sta $FD
+94c9: a9 1f     -         lda #$1F
+94cb: a2 40     -         ldx #$40
+94cd: 20 54 91  -         jsr L_JSR_9172_94EB
+94d0: a9 3f     -         lda #$3F
+94d2: 85 fc     -         sta $FC
+94d4: a9 40     -         lda #$40
+94d6: 85 fb     -         sta $FB
+94d8: a9 cc     -         lda #$CC
+94da: 85 fe     -         sta $FE
+94dc: a9 00     -         lda #$00
+94de: 85 fd     -         sta $FD
+94e0: a9 03     -         lda #$03
+94e2: a2 e8     -         ldx #$E8
+94e4: 20 54 91  -         jsr L_JSR_9172_9502
+94e7: a9 43     -         lda #$43
+94e9: 85 fc     -         sta $FC
+94eb: a9 38     -         lda #$38
+94ed: 85 fb     -         sta $FB
+94ef: a9 d8     -         lda #$D8
+94f1: 85 fe     -         sta $FE
+94f3: a9 00     -         lda #$00
+94f5: 85 fd     -         sta $FD
+94f7: a9 03     -         lda #$03
+94f9: a2 e8     -         ldx #$E8
+94fb: 4c 54 91  -         jmp L_JMP_9172_9519
+94fe: a9 10     - L_JMP_951C_9022:lda #$10
+9500: 0d 16 d0  -         ora $D016                         // Control Register 2
+9503: 8d 16 d0  -         sta $D016                          // Control Register 2
+9506: a9 38     -         lda #$38
+9508: 8d 18 d0  -         sta $D018                          // Memory Control Register
+950b: ad 00 dd  -         lda $DD00                          // Data Port A (Serial Bus, RS232, VIC Base Mem.)
+950e: 29 fc     -         and #$FC
+9510: 8d 00 dd  -         sta $DD00                          // Data Port A (Serial Bus, RS232, VIC Base Mem.)
+9513: a9 20     -         lda #$20
+9515: 0d 11 d0  -         ora $D011                         // Control Register 1
+9518: 8d 11 d0  -         sta $D011                          // Control Register 1
+951b: 60        -         rts
+951c: a9 a0     - L_JMP_953A_901F:lda #$A0
+951e: 85 04     -         sta $04
+9520: a9 00     -         lda #$00
+9522: 85 03     -         sta $03
+9524: a9 9c     -         lda #$9C
+9526: 8d 6c 95  -         sta $956C
+9529: a9 00     -         lda #$00
+952b: 8d 6b 95  -         sta $956B
+952e: a9 d8     -         lda #$D8
+9530: 8d 75 95  -         sta $9575
+9533: a9 00     -         lda #$00
+9535: 8d 74 95  -         sta $9574
+9538: a9 8c     -         lda #$8C
+953a: 8d 7c 95  -         sta $957C
+953d: a9 00     -         lda #$00
+953f: 8d 7b 95  -         sta $957B
+9542: a2 00     -         ldx #$00
+9544: a9 c0     - L_BRS_9562_95A8,L_BRS_9562_95B8:lda #$C0
+9546: 85 fc     -         sta $FC
+9548: a9 00     -         lda #$00
+954a: 85 fb     -         sta $FB
+954c: bd 00 9c  -         lda $9C00,X
+954f: c9 20     -         cmp #$20
+9551: f0 1e     -         beq L_BRS_958F_956F
+9553: 85 02     -         sta $02
+9555: bd 00 d8  -         lda $D800,X
+9558: 0a        -         asl
+9559: 0a        -         asl
+955a: 0a        -         asl
+955b: 0a        -         asl
+955c: 9d 00 8c  -         sta $8C00,X
+955f: 8a        -         txa
+9560: 48        -         pha
+9561: a2 08     -         ldx #$08
+9563: 20 13 94  -         jsr L_JSR_9431_9581
+9566: 68        -         pla
+9567: aa        -         tax
+9568: a0 07     -         ldy #$07
+956a: b1 fb     - L_BRS_9588_958D:lda ($FB),Y
+956c: 91 03     -         sta ($03),Y
+956e: 88        -         dey
+956f: 10 f9     -         bpl L_BRS_9588_958D
+9571: a5 03     - L_BRS_958F_956F:lda $03
+9573: 18        -         clc
+9574: 69 08     -         adc #$08
+9576: 85 03     -         sta $03
+9578: 90 02     -         bcc L_BRS_959A_9596
+957a: e6 04     -         inc $04
+957c: e8        - L_BRS_959A_9596:inx
+957d: ad 6c 95  -         lda $956C
+9580: c9 9f     -         cmp #$9F
+9582: 90 04     -         bcc L_BRS_95A6_95A0
+9584: e0 e8     -         cpx #$E8
+9586: b0 04     -         bcs L_BRS_95AA_95A4
+9588: e0 00     - L_BRS_95A6_95A0:cpx #$00
+958a: d0 b8     -         bne L_BRS_9562_95A8
+958c: ee 6c 95  - L_BRS_95AA_95A4:inc $956C
+958f: ee 75 95  -         inc $9575
+9592: ee 7c 95  -         inc $957C
+9595: ad 6c 95  -         lda $956C
+9598: c9 a0     -         cmp #$A0
+959a: 90 a8     -         bcc L_BRS_9562_95B8
+959c: 60        -         rts
+959d: 20 04 94  - L_JMP_95BB_9016:jsr L_JSR_9422_95BB
+95a0: a9 a0     -         lda #$A0
+95a2: 85 fc     -         sta $FC
+95a4: a9 00     -         lda #$00
+95a6: 85 fb     -         sta $FB
+95a8: a9 e0     -         lda #$E0
+95aa: 85 fe     -         sta $FE
+95ac: a9 00     -         lda #$00
+95ae: 85 fd     -         sta $FD
+95b0: a9 1f     -         lda #$1F
+95b2: a2 40     -         ldx #$40
+95b4: 20 54 91  -         jsr L_JSR_9172_95D2
+95b7: a9 8c     -         lda #$8C
+95b9: 85 fc     -         sta $FC
+95bb: a9 00     -         lda #$00
+95bd: 85 fb     -         sta $FB
+95bf: a9 cc     -         lda #$CC
+95c1: 85 fe     -         sta $FE
+95c3: a9 00     -         lda #$00
+95c5: 85 fd     -         sta $FD
+95c7: a9 03     -         lda #$03
+95c9: a2 e8     -         ldx #$E8
+95cb: 20 54 91  -         jsr L_JSR_9172_95E9
+95ce: 4c 0b 94  -         jmp L_JMP_9429_95EC
+95d1: 20 fc 93  - L_JMP_95EF_9019:jsr L_JSR_941A_95EF
+95d4: a9 e0     -         lda #$E0
+95d6: 85 fc     -         sta $FC
+95d8: a9 00     -         lda #$00
+95da: 85 fb     -         sta $FB
+95dc: a9 a0     -         lda #$A0
+95de: 85 fe     -         sta $FE
+95e0: a9 00     -         lda #$00
+95e2: 85 fd     -         sta $FD
+95e4: a9 1f     -         lda #$1F
+95e6: a2 40     -         ldx #$40
+95e8: 20 54 91  -         jsr L_JSR_9172_9606
+95eb: a9 cc     -         lda #$CC
+95ed: 85 fc     -         sta $FC
+95ef: a9 00     -         lda #$00
+95f1: 85 fb     -         sta $FB
+95f3: a9 8c     -         lda #$8C
+95f5: 85 fe     -         sta $FE
+95f7: a9 00     -         lda #$00
+95f9: 85 fd     -         sta $FD
+95fb: a9 03     -         lda #$03
+95fd: a2 e8     -         ldx #$E8
+95ff: 20 54 91  -         jsr L_JSR_9172_961D
+9602: 20 0b 94  -         jsr L_JSR_9429_9620
+9605: 60        -         rts
+9606: a9 08     - L_JMP_9624_902B:lda #$08
+9608: 85 fc     -         sta $FC
+960a: a9 00     -         lda #$00
+960c: 85 fb     -         sta $FB
+960e: a9 00     -         lda #$00
+9610: a0 00     -         ldy #$00
+9612: 91 fb     - L_BRS_9630_9633,L_BRS_9630_9637:sta ($FB),Y
+9614: c8        -         iny
+9615: d0 fb     -         bne L_BRS_9630_9633
+9617: e6 fc     -         inc $FC
+9619: d0 f7     -         bne L_BRS_9630_9637
+961b: 60        -         rts

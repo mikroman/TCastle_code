@@ -1,0 +1,234 @@
+castle_startup.txt
+
+#<tc1>#
+BLITZ_BASIC_HEADER 
+ 8097 clr
+ 8098 #load"tc",8
+ 8104 end
+########################
+
+#<tc>#
+ 8096 clr
+ 8098 poke56,128
+ 8103 clr
+ 8104 poke53280,0
+ 8112 poke53281,0
+ 8120 print"{clr}"
+ 8123 if(peek(36864)<>16)then:load"mcode",8,1
+
+ 8144 sys((36865+18)) #36883 $9013
+ 8154 load "cm",8
+ 8160 end
+ mcode->
+          // CBINV - BRK $90B0
+          // NMIINV - NMI $90B5
+          // STOP vector
+          // Control OS Messages
+
+          // #load TITLE($5C00) and ARR($BF40)
+
+          // move $6000-7F3F to $A000-BF3F
+          // move $5C00-5fe7 to $8C00-8fe7
+
+
+
+          // LOAD/RUN "CM"
+########################
+
+          // move $D000-D7ff to $C000
+BA+21
+          // move $A000-AF3F to $E000
+          // move $8C00-83E7 to $CC00
+########################
+
+#<cm>#
+ 10319 if(r=1)then:l$="bjl"
+ 10329 if(r=2)then:l$="crl"
+ 10339 if(r=3)then:l$="knl"
+ 10349 if(r=4)then:l$="pkl"
+ 10359 if(r=5)then:l$="rll"
+ 10369 if(r=6)then:l$="sll"
+ 10441 #loadl$,8
+          (i.e.) "CRL"
+########################
+
+example using crl (CRAPS)
+CODE\BASIC_listings\BASIC_a\crl.txt.bas:
+
+EOB=$9000
+set MC colour, priority, SP0X and Y
+sys 36897 (JMP $96C2)
+
+load "ccode",8,1
+
+->ccode 9021-> 96C2
+init SID
+BRK = $91CB
+NMI = $91D0
+set STOP
+load "CRAPSDAT" $C980
+load "CRAPS"    $A000
+
+move $a000-bf3f to $E000-ff3f
+move $bf40-C327 to $CC00-CFE7
+move $C3C8-c718 to $D800-DBE7
+
+load "ARR"      $FF40
+
+RETURN TO BASIC
+
+LOAD/RUN CRG
+####?
+move $a000-beff to $6000-7eff
+move $bf00-bf3f to $7f00-7f3f
+####
+
+set CIA and return to BASIC CRG
+
+sys $9024
+sys $902D
+
+CM  635:  15032 sys((ba+(8*3)))
+
+CODE\BASIC_listings\BASIC_a\crg.txt.bas:
+
+   757: 10433 sys((ba+3)):rem $9003
+   758: 10438 sys((ba+6)):rem $9006
+   759: 10443 sys(ba):rem $9000
+
+   763: 10457 sys((ba+63)):rem $903F
+
+   781: 10608 sys((ba+21)):rem $9015
+
+   797: 10721 sys((ba+(17*3))):rem $9033
+   799: 10731 sys((ba+63)):rem $903F
+
+   804: 10748 if(peek((v4+2))=0)then:if(peek(v4)=0)then:poke(v4+1),1:poke2,1:sys((ba+63)):rem $903f v4=$9094
+
+   821: 10895 sys((ba+27)):rem $901B
+
+   827: 10916 if(bu=0)then:sys((ba+(18*3))):return:rem $9036
+   828: 10929 sys((ba+30)):rem $901E
+
+   852: 11063 sys((ba+63)):rem $903F
+  
+   860: 11095 sys((ba+63)):rem $903F
+  
+   925: 11518 sys((ba+(14*3))):rem $902A
+  
+   975: 11940 sys((ba+(15*3))):rem $902D
+  
+   992: 12069 sys((ba+(15*3))):rem $902D
+  
+  1021: 12203 sys((ba+(12*3))):rem $9024
+  1023: 12211 sys(ba):rem $9000
+  1031: 12269 sys((ba+24)):rem $9018
+  1034: 12278 sys((ba+(21*3))):rem $903f
+
+  1039: 12335 sys((ba+(21*3))):rem $903f
+  1042: 12346 sys((ba+63)):rem $903F
+
+  1070: 12538 sys((ba+63)):rem $903F
+
+  1096: 12802 sys((ba+(19*3))):rem $9039
+  1097: 12809 sys((ba+3)):rem $9003
+  1098: 12814 sys((ba+18)):rem $9012
+
+  1117: 12989 sys((ba+60)):rem $903C
+  1119: 12998 sys((ba+63)):rem $903F
+  1120: 13004 sys(ba):rem
+  1121: 13007 sys((ba+15)):rem $900F
+
+  1144: 13316 sys((ba+(22*3))):rem $9042
+
+  1162: 13573 sys((ba+(16*3))):rem $9030
+
+  1305: 14990 sys((ba+21)):rem $9015
+
+  1347: 15523 sys((ba+3)):rem $9003
+  1348: 15528 sys((ba+9)):rem $9009
+
+  1352: 15557 sys((ba+18)):rem $9012
+
+  1370: 15653 sys((ba+(19*3))):rem $9039
+  1371: 15660 sys((ba+3)):rem $9003
+  1372: 15665 sys((ba+18)):rem $9012
+
+  1396: 15975 sys((ba+60)):rem $903C
+  1398: 15984 sys((ba+63)):rem $903F
+  1399: 15990 sys(ba):rem
+  1400: 15993 sys((ba+15)):rem $900F
+  1402: 15999 sys((ba+21)):rem $9015
+
+  1441: 16321 sys((ba+(19*3))):rem $9039
+  1442: 16328 sys((ba+3)):rem $9003
+  1443: 16333 sys((ba+18)):rem $9012
+
+  1458: 16434 sys((ba+63)):rem $903F
+  1459: 16440 sys((ba+60)):rem $903C
+  1460: 16446 sys(ba):rem $9000
+  1461: 16449 sys((ba+15)):rem $900F
+  
+
+  petcat -2 -o x.txt -- hkng.bas.prg
+
+1  d "arr"
+1  d "arr2"
+1  d "arr3"
+14   "ccode"            9000
+1  B "cml"
+29 B "cm"
+3  d "crapsdat"         7000
+35 B "crg"
+2  B "crl"
+2    "hdat"             C000
+16   "kcode"            9000
+1    "kenodat"          C000
+16   "kng"              HID
+2  B "knl"
+2    "lcode"            C000
+7    "mcode"            9000
+12   "rbuff"            C000
+16   "rcode"            7000
+24 B "rig"
+24 B "rlg"
+2  B "rll"
+2  d "roulettedat"
+1    "scores"           SEQ
+24 B "tc1"
+1  B "tc"
+37 G "title"            5C00
+47   "trump castle"
+21   "wheeldat2"        5000
+40 G "craps"            2000
+40 G "keno"             2000
+40 G "mixer"            2000
+40 G "roulette"         2000
+40 G "wheeldat"         2000
+	 -- SIDE-B --
+1  d "arr"
+5    "bjdat"            C000
+24 B "bjg"
+2  B "bjl"
+37 G "blackjack"        5C00
+16   "bpcode"           9000
+1  B "cml"
+9    "col1"-"col9"      C800
+8    "han1"             C000
+8    "han2"             C000
+8    "han3"             C000
+8    "jqk"              C000
+3    "nam2"-"nam9"      C000
+3    "pay1"-"pay9"      0400
+12 B "pkg"
+2  B "pkl"
+37 G "poker"            5C00
+1    "progs"            SEQ
+32 G "sl1"              2000
+32 G "sl2"              2000
+32 G "sl3"              2000
+17   "slcode"           7000
+4    "sldat"            C000
+17 B "slg"
+4  B "sll"
+40 G "slotsel"          2000

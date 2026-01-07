@@ -1,0 +1,10 @@
+8096 data1,2,13,240,236
+8113 poke56,144:clr:if(peek(36864)=76)then8282
+8132 poke53280,5:poke53281,5:poke53287,1:i=1
+8158 fori=ito3:reada:poke(53287+i),a:next:readx:ready:i=0
+8184 fori=ito2:poke(53250+(2*i)),((x+(18*i))and255):poke(53251+(2*i)),y:next
+8220 hb=0:i=1:fori=ito3:if((x+(18*(i-1)))>255)then:hb=(hb+(2^i))
+8246 next:poke53264,hb:poke53240,253:i=1:fori=ito7:poke(53240+i),254:next
+8282 if(peek(36864)<>76)then:load"ccode",8,1
+8304 poke53276,254:poke53285,0:poke53275,0:poke53248,150:poke53249,150
+8305 sys((36864+(11*3))):load"crg",8

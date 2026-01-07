@@ -1,0 +1,9 @@
+8103 clr:poke56,91:clr
+8111 if(peek(28672)=76)then8271
+8121 poke53280,5:poke53281,5:poke53287,1:fori=1to7:poke(53287+i),7:next
+8170 fori=0to4:poke(53252+(2*i)),((250+(18*i))and255):poke(53253+(2*i)),81:next
+8206 hb=0:fori=1to5:if((250+(18*(i-1)))>255)thenhb=(hb+(2^(i+1)))
+8234 next:poke53264,hb:poke53240,253
+8252 if(peek(28672)<>76)then:load"rcode",8,1
+8271 poke53276,254:poke53285,0:poke53275,0:poke53248,150:poke53249,150
+8314 sys((28672+(11*3))):load"rlg",8
