@@ -1,2 +1,2 @@
-files needed to build Kump Castle"
+files needed to build Kump Castle
 
